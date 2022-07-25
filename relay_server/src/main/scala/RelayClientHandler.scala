@@ -10,16 +10,14 @@ class RelayClientHandler(relayedClient: ActorRef, client: ActorRef) extends Acto
   import Tcp._
 
   def receive: Receive = {
-    case Received(data)
-      if sender() == client =>
+    case Received(data) if sender() == client =>
       relayedClient ! Write(data)
-    case Received(data)
-      if sender() == relayedClient =>
+    case Received(data) if sender() == relayedClient =>
       client ! Write(data)
-    case _:
-      ConnectionClosed =>
+    case _: ConnectionClosed =>
       log.info("Connection closed")
       context.stop(self)
-    case PeerClosed => context.stop(self)
+    case PeerClosed =>
+      context.stop(self)
   }
 }

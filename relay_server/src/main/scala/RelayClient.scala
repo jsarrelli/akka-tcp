@@ -19,10 +19,9 @@ class RelayClient(relayedClient: ActorRef) extends Actor with ActorLogging {
 
   def receive: Receive = {
     case Bound(localAddress) =>
-      log.info(s"Established relay address: ${localAddress.getPort}")
+      log.info(s"Established relay address: ${localAddress.getAddress}:${localAddress.getPort}")
 
-    case CommandFailed(_:
-      Bind) =>
+    case CommandFailed(_: Bind) =>
       context.stop(self)
 
     case Connected(remote, local) =>
@@ -31,8 +30,10 @@ class RelayClient(relayedClient: ActorRef) extends Actor with ActorLogging {
       handler = context.actorOf(RelayClientHandler.props(relayedClient, connection), s"main.scala.RelayClientHandler-${local.getPort}")
       connection ! Register(handler)
 
-    case msg:
-      Received => handler forward msg
+    case msg: Received =>
+      //This is not actually okay if we want to have different clients under the same relayed client,
+      // it cannot distinguish who is the actual sender and because of that, who to reply
+      handler forward msg
 
   }
 

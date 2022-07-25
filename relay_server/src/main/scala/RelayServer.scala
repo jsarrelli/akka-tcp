@@ -20,8 +20,7 @@ class RelayServer(listenPort: Int) extends Actor with ActorLogging {
     case Bound(localAddress) =>
       log.info(s"Relay Server bounded successfully on listenPort: ${localAddress.getPort}")
 
-    case CommandFailed(_:
-      Bind) =>
+    case CommandFailed(_: Bind) =>
       context.stop(self)
 
     case Connected(remote, local) =>

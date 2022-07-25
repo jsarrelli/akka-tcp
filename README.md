@@ -80,6 +80,24 @@ Thanks, and good luck!
 
 
 
-#Solution
+# Solution
 
-...
+Solution was built using Akka Http modules.
+
+### Steps to build the project
+```
+sh ./build_jars
+```
+This command builds two jars for the two modules of the project.
+ - Echo Server
+ - Relay Server
+
+### Steps to run application
+```
+sh ./relay.sh {?port}
+sh ./echoserver.sh {?host} {?port}
+established relay address: localhost:8081
+$ telnet localhost 8081
+Hello, world
+Hello, world
+```
