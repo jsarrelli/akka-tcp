@@ -86,7 +86,7 @@ Solution was built using Akka Http modules.
 
 ### Steps to build the project
 ```
-sh ./build_jars
+sh ./build_jars.sh
 ```
 This command builds two jars for the two modules of the project.
  - Echo Server
