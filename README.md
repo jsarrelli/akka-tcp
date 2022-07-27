@@ -96,8 +96,8 @@ This command builds two jars for the two modules of the project.
 ```
 sh ./relay.sh {?port}
 sh ./echoserver.sh {?host} {?port}
-established relay address: localhost:8081
-$ telnet localhost 8081
+Established relay address: {output_host}:{output_port}
+$ telnet localhost {$ouput_port}
 Hello, world
 Hello, world
 ```
