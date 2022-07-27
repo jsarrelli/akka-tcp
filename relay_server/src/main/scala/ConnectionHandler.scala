@@ -1,11 +1,11 @@
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.io.Tcp
 
-object RelayClientHandler {
-  def props(relayedClient: ActorRef, client: ActorRef): Props = Props(new RelayClientHandler(relayedClient, client))
+object ConnectionHandler {
+  def props(relayedClient: ActorRef, client: ActorRef): Props = Props(new ConnectionHandler(relayedClient, client))
 }
 
-class RelayClientHandler(relayedClient: ActorRef, client: ActorRef) extends Actor with ActorLogging {
+class ConnectionHandler(relayedClient: ActorRef, client: ActorRef) extends Actor with ActorLogging {
 
   import Tcp._
 

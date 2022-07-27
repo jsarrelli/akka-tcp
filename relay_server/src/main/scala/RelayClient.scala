@@ -27,7 +27,7 @@ class RelayClient(relayedClient: ActorRef) extends Actor with ActorLogging {
     case Connected(remote, local) =>
       log.info(s"New client for relayed client:${local.getPort}")
       val connection = sender()
-      handler = context.actorOf(RelayClientHandler.props(relayedClient, connection), s"RelayClientHandler-${local.getPort}")
+      handler = context.actorOf(ConnectionHandler.props(relayedClient, connection))
       connection ! Register(handler)
 
     case msg: Received =>
